@@ -1,1 +1,1 @@
-worker: python mpar_bot.py
+worker: python run.py

@@ -1,0 +1,1 @@
+worker: python mpar_bot.py

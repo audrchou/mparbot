@@ -33,30 +33,30 @@ async def on_message(message):
     #     await client.send_message(message.channel, msg)
 
     # checks for retweet emojis
-    file = open('retweeted_messages.txt', 'r+')
-    retweeted_messages = []
-    for m in file.readlines():
-        retweeted_messages.append(m.strip())
-    new_messages = []
-    for c in client.get_all_channels():
-        async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
-            for r in m.reactions:
-                if r.custom_emoji:
-                    if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages and message.author != client.user:
-                        new_messages.append(m.id)
-                        msg = '<:retweet:449394937541427230> x ' + str(r.count)
-                        if m.author.nick is None:
-                            nickname = m.author.name
-                        else:
-                            nickname = m.author.nick
-                        em = discord.Embed(description=m.content, title="#" + c.name, colour=0000000)
-                        em.set_author(name = nickname, icon_url = m.author.avatar_url)
-                        await client.send_message(client.get_channel('448621029930303488'),
-                                                  msg.format(message),
-                                                  embed = em)
-    for m in new_messages:
-        file.write(m + '\n')
-    file.close()
+    # file = open('retweeted_messages.txt', 'r+')
+    # retweeted_messages = []
+    # for m in file.readlines():
+    #     retweeted_messages.append(m.strip())
+    # new_messages = []
+    # for c in client.get_all_channels():
+    #     async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
+    #         for r in m.reactions:
+    #             if r.custom_emoji:
+    #                 if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages and message.author != client.user:
+    #                     new_messages.append(m.id)
+    #                     msg = '<:retweet:449394937541427230> x ' + str(r.count)
+    #                     if m.author.nick is None:
+    #                         nickname = m.author.name
+    #                     else:
+    #                         nickname = m.author.nick
+    #                     em = discord.Embed(description=m.content, title="#" + c.name, colour=0000000)
+    #                     em.set_author(name = nickname, icon_url = m.author.avatar_url)
+    #                     await client.send_message(client.get_channel('448621029930303488'),
+    #                                               msg.format(message),
+    #                                               embed = em)
+    # for m in new_messages:
+    #     file.write(m + '\n')
+    # file.close()
 
 @client.event
 async def on_ready():

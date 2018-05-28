@@ -41,7 +41,7 @@ async def on_message(message):
         msg = 'NO'.format(message)
         await client.send_message(message.channel, msg)
 
-    if message.content.startswith('?google'):
+    if message.content.startswith('?google') or message.content.startswith('!google'):
         msg = 'Bots can\'t use Google anymore, you dumb bitch'.format(message)
         await client.send_message(message.channel, msg)
 
@@ -59,7 +59,8 @@ async def on_message(message):
         async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
             for r in m.reactions:
                 if r.custom_emoji:
-                    if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages and message.author != client.user:
+                    if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages \
+                            and message.author != client.user:
                         new_messages.append(m.id)
                         msg = '<:retweet:449394937541427230> x ' + str(r.count)
                         em = discord.Embed(description=m.content, title="#" + c.name, colour=0000000)

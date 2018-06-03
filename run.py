@@ -98,11 +98,11 @@ async def check_for_retweets():
                 print(m.content)
                 print(m.id)
                 retweeted_messages.append(m.id)
-                await client.send_message(client.get_channel('449644920412831755'),
+                await client.send_message(client.get_channel('448621029930303488'),
                                           msg,
                                           embed=em)
-                # 448621029930303488
                 #
+                # 449644920412831755
             print('Sleeping')
             await asyncio.sleep(60)  # task runs every 60 seconds
     except Exception:

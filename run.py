@@ -120,27 +120,27 @@ async def on_ready():
     for m in file.readlines():
         retweeted_messages.append(m.strip())
 
-    new_messages = []
-    for c in client.get_all_channels():
-        async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
-            for r in m.reactions:
-                if r.custom_emoji:
-                    if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages \
-                    and m.author != client.user:
-                        new_messages.append(m.id)
-                        print(m.content)
-                        print(m.id)
-                        if len(m.attachments) > 0:
-                            image_url = m.attachments[0].get('url')
-                            print(image_url)
-                        else:
-                            if len(m.embeds) > 0:
-                                image_url = m.embeds[0].get('url')
-                                print(image_url)
-                        #451474931801128968
-    for m in new_messages:
-            file.write(m + '\n')
-    file.close()
+    # new_messages = []
+    # for c in client.get_all_channels():
+    #     async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
+    #         for r in m.reactions:
+    #             if r.custom_emoji:
+    #                 if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages \
+    #                 and m.author != client.user:
+    #                     new_messages.append(m.id)
+    #                     print(m.content)
+    #                     print(m.id)
+    #                     if len(m.attachments) > 0:
+    #                         image_url = m.attachments[0].get('url')
+    #                         print(image_url)
+    #                     else:
+    #                         if len(m.embeds) > 0:
+    #                             image_url = m.embeds[0].get('url')
+    #                             print(image_url)
+    #                     #451474931801128968
+    # for m in new_messages:
+    #         file.write(m + '\n')
+    # file.close()
 
     print('Logged in as')
     print(client.user.name)
@@ -150,6 +150,6 @@ async def on_ready():
     #     print(x.id)
     print('------')
 
-#client.loop.create_task(check_for_retweets())
+client.loop.create_task(check_for_retweets())
 
 client.run(token)

@@ -1,14 +1,14 @@
 # https://github.com/Rapptz/discord.py/blob/async/examples/reply.py
 import discord
-import time
 import asyncio
+import psycopg2
 
 # from discord.ext import commands
 
 token = 'NDQ4NTQzNjgwNDU0ODUyNjI4.DeZPaw.RHAWgz1vmD2B_uq7-4HtJuf--Tw'
 client = discord.Client()
 
-retweeted_messages = []
+url = 'postgres://dgzcdovzsyhrlv:e29f3af8127cfff61a48f5b9f9a01d0299257426bc5e5d86775cd65c24348ac4@ec2-23-23-247-245.compute-1.amazonaws.com:5432/dfn2t2umeaj9vj'
 
 @client.event
 async def on_message(message):
@@ -57,14 +57,19 @@ async def check_for_retweets():
     await client.wait_until_ready()
     try:
         while not client.is_closed:
-            print(time.time() % 60)
-            # file = open('retweeted_messages.txt', 'r+')
-            # retweeted_messages = []
-            # for m in file.readlines():
-            #     retweeted_messages.append(m.strip())
+            print('------')
+
+            #pull already retweeted messages from database
+            conn = psycopg2.connect(url, sslmode='require')
+            cur = conn.cursor()
+
+            cur.execute("SELECT messageid FROM retweeted_messages;")
+            retweeted_messages = [x[0] for x in cur.fetchall()]
+
             new_messages = []
             new_messages_timestamps = []
             new_messages_rcount = []
+
             #get all messages with the proper number of retweet emojis
             for c in client.get_all_channels():
                 async for m in client.logs_from(client.get_channel(c.id), limit=100000):
@@ -75,6 +80,7 @@ async def check_for_retweets():
                                 new_messages.append(m)
                                 new_messages_timestamps.append(m.timestamp)
                                 new_messages_rcount.append(r.count)
+
             #post messages in order of timestamp
             timestamps_order = sorted(range(len(new_messages_timestamps)), key=lambda k: new_messages_timestamps[k]) # indices of sorted
             for index in timestamps_order:
@@ -90,24 +96,29 @@ async def check_for_retweets():
                 if len(m.attachments) > 0:
                     image_url = m.attachments[0].get('url')
                     em.set_image(url=image_url)
+                    print(image_url)
                 else:
                     if len(m.embeds) > 0:
                         image_url = m.embeds[0].get('url')
                         em.set_image(url=image_url)
+                        print(image_url)
                 em.set_footer(text="#" + m.channel.name)
                 print(m.content)
                 print(m.id)
-                retweeted_messages.append(m.id)
                 await client.send_message(client.get_channel('448621029930303488'),
                                           msg,
                                           embed=em)
                 #
                 # 449644920412831755
-            #write message ids to file
-            file = open('retweeted_messages.txt', 'w')
+
+            #write new message ids to database
             for m in new_messages:
-                file.write(m.id + '\n')
-            file.close()
+                cur.execute("INSERT INTO retweeted_messages (messageid) VALUES (%s)" % m.id)
+
+            conn.commit()
+            cur.close()
+            conn.close()
+
             print('Sleeping')
             await asyncio.sleep(60)  # task runs every 60 seconds
     except Exception:
@@ -116,31 +127,13 @@ async def check_for_retweets():
 
 @client.event
 async def on_ready():
-    file = open('retweeted_messages.txt', 'r+')
-    for m in file.readlines():
-        retweeted_messages.append(m.strip())
-
-    # new_messages = []
-    # for c in client.get_all_channels():
-    #     async for m in client.logs_from(client.get_channel(c.id), limit = 100000):
-    #         for r in m.reactions:
-    #             if r.custom_emoji:
-    #                 if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages \
-    #                 and m.author != client.user:
-    #                     new_messages.append(m.id)
-    #                     print(m.content)
-    #                     print(m.id)
-    #                     if len(m.attachments) > 0:
-    #                         image_url = m.attachments[0].get('url')
-    #                         print(image_url)
-    #                     else:
-    #                         if len(m.embeds) > 0:
-    #                             image_url = m.embeds[0].get('url')
-    #                             print(image_url)
-    #                     #451474931801128968
-    # for m in new_messages:
-    #         file.write(m + '\n')
-    # file.close()
+    # conn = psycopg2.connect(url, sslmode='require')
+    # cur = conn.cursor()
+    #
+    # cur.execute("SELECT messageid FROM retweeted_messages;")
+    # retweeted_messages = [x[0] for x in cur.fetchall()]
+    #
+    # print(len(retweeted_messages))
 
     print('Logged in as')
     print(client.user.name)

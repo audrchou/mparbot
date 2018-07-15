@@ -87,24 +87,33 @@ async def check_for_retweets():
                 m = new_messages[index]
                 msg = '<:retweet:449394937541427230> x ' + str(new_messages_rcount[index])
                 em = discord.Embed(description=m.content, colour=0000000)
+                if len(m.attachments) > 0:
+                    image_url = m.attachments[0].get('url')
+                    em.set_image(url=image_url)
+                    print(image_url)
+                if len(m.embeds) > 0:
+                    print(m.embeds[0].get('url') != None)
+                    if m.embeds[0].get('description') != None: #text embed
+                        content = ''
+                        if m.embeds[0].get('title') != None:
+                            content = m.embeds[0].get('title') + '\n'
+                        content = content + m.embeds[0].get('description') + '\n'
+                        if m.embeds[0].get('footer') != None:
+                            content = content + m.embeds[0].get('footer').get('text')
+                        em = discord.Embed(description=content, colour=0000000)
+                    if m.embeds[0].get('url') != None: #image embed
+                        image_url = m.embeds[0].get('url')
+                        em.set_image(url=image_url)
+                        print(image_url)
                 if m.author.nick is None:
                     nickname = m.author.name
                     em.set_author(name=nickname, icon_url=m.author.avatar_url)
                 else:
                     nickname = m.author.nick
                     em.set_author(name=nickname, icon_url=m.author.avatar_url)
-                if len(m.attachments) > 0:
-                    image_url = m.attachments[0].get('url')
-                    em.set_image(url=image_url)
-                    print(image_url)
-                else:
-                    if len(m.embeds) > 0:
-                        image_url = m.embeds[0].get('url')
-                        em.set_image(url=image_url)
-                        print(image_url)
                 em.set_footer(text="#" + m.channel.name)
-                print(m.content)
-                print(m.id)
+                print(msg)
+                print(em.description)
                 await client.send_message(client.get_channel('448621029930303488'),
                                           msg,
                                           embed=em)
@@ -132,8 +141,6 @@ async def on_ready():
     #
     # cur.execute("SELECT messageid FROM retweeted_messages;")
     # retweeted_messages = [x[0] for x in cur.fetchall()]
-    #
-    # print(len(retweeted_messages))
 
     print('Logged in as')
     print(client.user.name)

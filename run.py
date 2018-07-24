@@ -5,7 +5,7 @@ import psycopg2
 
 # from discord.ext import commands
 
-token = 'NDQ4NTQzNjgwNDU0ODUyNjI4.DeZPaw.RHAWgz1vmD2B_uq7-4HtJuf--Tw'
+token = 'NDQ4NTQzNjgwNDU0ODUyNjI4.DjjsdQ.T1d7HVs-0kUCqCMkm9yNQHBIbHQ'
 client = discord.Client()
 
 url = 'postgres://dgzcdovzsyhrlv:e29f3af8127cfff61a48f5b9f9a01d0299257426bc5e5d86775cd65c24348ac4@ec2-23-23-247-245.compute-1.amazonaws.com:5432/dfn2t2umeaj9vj'

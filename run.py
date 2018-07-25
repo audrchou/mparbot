@@ -3,7 +3,13 @@ import discord
 import asyncio
 import psycopg2
 
-from local_settings import *
+import os
+
+try: 
+    from local_settings import *
+except ImportError:
+    token = os.environ['TOKEN']
+    url = os.environ['DATABASE_URL']
 
 # from discord.ext import commands
 

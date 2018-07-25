@@ -3,12 +3,11 @@ import discord
 import asyncio
 import psycopg2
 
+from local_settings import *
+
 # from discord.ext import commands
 
-token = 'NDQ4NTQzNjgwNDU0ODUyNjI4.DjjsdQ.T1d7HVs-0kUCqCMkm9yNQHBIbHQ'
 client = discord.Client()
-
-url = 'postgres://dgzcdovzsyhrlv:e29f3af8127cfff61a48f5b9f9a01d0299257426bc5e5d86775cd65c24348ac4@ec2-23-23-247-245.compute-1.amazonaws.com:5432/dfn2t2umeaj9vj'
 
 @client.event
 async def on_message(message):

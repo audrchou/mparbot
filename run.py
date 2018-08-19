@@ -3,15 +3,17 @@ import discord
 import asyncio
 import psycopg2
 
+# from discord.ext import commands
+
 import os
 
-try: 
-    from local_settings import *
+try:
+      from local_settings import *
 except ImportError:
-    token = os.environ['TOKEN']
-    url = os.environ['DATABASE_URL']
+      token = os.environ['TOKEN']
+      url = os.environ['DATABASE_URL']
 
-# from discord.ext import commands
+#from datetime import datetime
 
 client = discord.Client()
 
@@ -80,6 +82,7 @@ async def check_for_retweets():
                 async for m in client.logs_from(client.get_channel(c.id), limit=100000):
                     for r in m.reactions:
                         if r.custom_emoji:
+                            # if r.emoji.name == 'retweet' and r.count > 2 and m.timestamp >= datetime.strptime('Aug 14 2018  5:00PM', '%b %d %Y %I:%M%p')\
                             if r.emoji.name == 'retweet' and r.count > 2 and m.id not in retweeted_messages \
                                     and m.author != client.user:
                                 new_messages.append(m)
@@ -110,20 +113,20 @@ async def check_for_retweets():
                         image_url = m.embeds[0].get('url')
                         em.set_image(url=image_url)
                         print(image_url)
-                if m.author.nick is None:
-                    nickname = m.author.name
-                    em.set_author(name=nickname, icon_url=m.author.avatar_url)
-                else:
+                if hasattr(m.author, 'nick'):
                     nickname = m.author.nick
                     em.set_author(name=nickname, icon_url=m.author.avatar_url)
+                else:
+                    nickname = m.author.name
+                    em.set_author(name=nickname, icon_url=m.author.avatar_url)
                 em.set_footer(text="#" + m.channel.name)
+                print(nickname)
+                print(m.timestamp)
                 print(msg)
                 print(em.description)
                 await client.send_message(client.get_channel('448621029930303488'),
                                           msg,
                                           embed=em)
-                #
-                # 449644920412831755
 
             #write new message ids to database
             for m in new_messages:

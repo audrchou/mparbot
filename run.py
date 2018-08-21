@@ -115,9 +115,9 @@ async def check_for_retweets():
                         print(image_url)
                 if hasattr(m.author, 'nick'):
                     if m.author.nick is None:
-                        nickname = m.author.nick
-                    else:
                         nickname = m.author.name
+                    else:
+                        nickname = m.author.nick
                     em.set_author(name=nickname, icon_url=m.author.avatar_url)
                 else:
                     nickname = m.author.name

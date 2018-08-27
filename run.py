@@ -127,7 +127,7 @@ async def check_for_retweets():
                 print(m.timestamp)
                 print(msg)
                 print(em.description)
-                await client.send_message(client.get_channel('448621029930303488'),
+                await client.send_message(client.get_channel('481334830882226176'),
                                           msg,
                                           embed=em)
 
@@ -158,6 +158,10 @@ async def on_ready():
     print(client.user.id)
     # for x in client.get_all_channels():
     #     print(x)
+    #     print(x.id)
+
+    # for x in client.get_all_emojis():
+    #     print(x.name)
     #     print(x.id)
     print('------')
 

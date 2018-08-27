@@ -69,7 +69,7 @@ async def check_for_retweets():
             #pull already retweeted messages from database
             conn = psycopg2.connect(url, sslmode='require')
             cur = conn.cursor()
-
+            cur.execute("CREATE TABLE retweeted_messages (messageid VARCHAR(100));")
             cur.execute("SELECT messageid FROM retweeted_messages;")
             retweeted_messages = [x[0] for x in cur.fetchall()]
 
@@ -93,7 +93,7 @@ async def check_for_retweets():
             timestamps_order = sorted(range(len(new_messages_timestamps)), key=lambda k: new_messages_timestamps[k]) # indices of sorted
             for index in timestamps_order:
                 m = new_messages[index]
-                msg = '<:retweet:449394937541427230> x ' + str(new_messages_rcount[index])
+                msg = '<:retweet:481632539677818880> x ' + str(new_messages_rcount[index])
                 em = discord.Embed(description=m.content, colour=0000000)
                 if len(m.attachments) > 0:
                     image_url = m.attachments[0].get('url')
@@ -160,11 +160,11 @@ async def on_ready():
     #     print(x)
     #     print(x.id)
 
-    # for x in client.get_all_emojis():
-    #     print(x.name)
-    #     print(x.id)
+    for x in client.get_all_emojis():
+        print(x.name)
+        print(x.id)
     print('------')
 
-client.loop.create_task(check_for_retweets())
+#client.loop.create_task(check_for_retweets())
 
 client.run(token)

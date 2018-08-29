@@ -69,7 +69,7 @@ async def check_for_retweets():
             #pull already retweeted messages from database
             conn = psycopg2.connect(url, sslmode='require')
             cur = conn.cursor()
-            cur.execute("CREATE TABLE retweeted_messages (messageid VARCHAR(100));")
+            #cur.execute("CREATE TABLE retweeted_messages (messageid VARCHAR(100));")
             cur.execute("SELECT messageid FROM retweeted_messages;")
             retweeted_messages = [x[0] for x in cur.fetchall()]
 

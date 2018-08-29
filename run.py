@@ -159,12 +159,12 @@ async def on_ready():
     # for x in client.get_all_channels():
     #     print(x)
     #     print(x.id)
-
-    for x in client.get_all_emojis():
-        print(x.name)
-        print(x.id)
+    #
+    # for x in client.get_all_emojis():
+    #     print(x.name)
+    #     print(x.id)
     print('------')
 
-#client.loop.create_task(check_for_retweets())
+client.loop.create_task(check_for_retweets())
 
 client.run(token)

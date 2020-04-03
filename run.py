@@ -73,6 +73,7 @@ async def check_for_retweets():
             cur.execute("SELECT timestamp FROM last_retweeted;")
             last_retweeted = [x[0] for x in cur.fetchall()]
             last_retweeted = datetime.strptime(last_retweeted[0], '%Y-%m-%d %H:%M:%S')
+            print('Last retweeted: ' + str(last_retweeted))
 
             new_messages = []
             new_messages_timestamps = []
@@ -86,6 +87,7 @@ async def check_for_retweets():
                             # if m.timestamp >= datetime.strptime('Aug 14 2018  5:00PM', '%b %d %Y %I:%M%p')\
                             if r.emoji.name == 'retweet' and r.count > 2 and m.timestamp > last_retweeted \
                                     and m.author != client.user:
+                                print(m.timestamp)
                                 new_messages.append(m)
                                 new_messages_timestamps.append(m.timestamp)
                                 new_messages_rcount.append(r.count)
@@ -132,6 +134,8 @@ async def check_for_retweets():
                                           msg,
                                           embed=em)
 
+            print(timestamps_order[-1].strftime('%Y-%m-%d %H:%M:%S'))
+            
             #write new latest timestamp to database
             cur.execute("DELETE FROM last_retweeted;")
             cur.execute("INSERT INTO last_retweeted (timestamp) VALUES (%s)" % timestamps_order[-1].strftime('%Y-%m-%d %H:%M:%S'))

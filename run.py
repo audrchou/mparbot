@@ -63,6 +63,7 @@ async def on_message(message):
 
 async def check_for_retweets():
     await client.wait_until_ready()
+    print('retweeting...')
     try:
         while not client.is_closed:
             print('------')

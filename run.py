@@ -74,8 +74,8 @@ async def check_for_retweets():
             #cur.execute("CREATE TABLE last_retweeted (timestamp timestamp);")
             cur.execute("SELECT timestamp FROM last_retweeted;")
             last_retweeted = [x[0] for x in cur.fetchall()]
-            print(type(last_retweeted[0]))
-            last_retweeted = datetime.strptime(last_retweeted[0], '%Y-%m-%d %H:%M:%S')
+            # last_retweeted = datetime.strptime(last_retweeted[0], '%Y-%m-%d %H:%M:%S')
+            last_retweeted = last_retweeted[0]
             print('Last retweeted: ' + str(last_retweeted))
 
             new_messages = []

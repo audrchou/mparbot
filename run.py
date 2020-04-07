@@ -148,8 +148,8 @@ async def check_for_retweets():
 
             print('Sleeping')
             await asyncio.sleep(60)  # task runs every 60 seconds
-    except Exception:
-        print(Exception.with_traceback())
+    except Exception as e:
+        print(str(e))
         await asyncio.sleep(60)
 
 @client.event

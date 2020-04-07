@@ -3,6 +3,7 @@ import discord
 import asyncio
 import psycopg2
 from datetime import datetime
+from datetime import timedelta
 
 # from discord.ext import commands
 
@@ -133,7 +134,7 @@ async def check_for_retweets():
                 await client.send_message(client.get_channel('481334830882226176'),
                                           msg,
                                           embed=em)
-            new_last_retweeted = "'" + new_messages_timestamps[timestamps_order[-1]].strftime('%Y-%m-%d %H:%M:%S') + "'"
+            new_last_retweeted = "'" + (new_messages_timestamps[timestamps_order[-1]]+timedelta(seconds=1)).strftime('%Y-%m-%d %H:%M:%S') + "'"
             print("New last retweeted: " + new_last_retweeted)
             
             #write new latest timestamp to database

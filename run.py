@@ -63,7 +63,7 @@ async def on_message(message):
 
 async def check_for_retweets():
     await client.wait_until_ready()
-    # print('retweeting...')
+    print('Retweeting...')
     try:
         while not client.is_closed:
             #pull already retweeted messages from database
@@ -133,12 +133,12 @@ async def check_for_retweets():
                 await client.send_message(client.get_channel('481334830882226176'),
                                           msg,
                                           embed=em)
-            print(max(new_messages_timestamps))
-            print(new_messages_timestamps[timestamps_order[-1]].strftime('%Y-%m-%d %H:%M:%S'))
+            new_last_retweeted = "'" + new_messages_timestamps[timestamps_order[-1]].strftime('%Y-%m-%d %H:%M:%S') + "'"
+            print("New last retweeted: " + new_last_retweeted)
             
             #write new latest timestamp to database
             cur.execute("DELETE FROM last_retweeted;")
-            cur.execute("INSERT INTO last_retweeted (timestamp) VALUES (%s)" % new_messages_timestamps[timestamps_order[-1]].strftime('%Y-%m-%d %H:%M:%S'))
+            cur.execute("INSERT INTO last_retweeted (timestamp) VALUES (%s)" % new_last_retweeted)
 
             conn.commit()
             cur.close()

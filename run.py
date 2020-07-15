@@ -83,7 +83,7 @@ async def check_for_retweets():
 
             #get all messages with the proper number of retweet emojis
             for c in client.get_all_channels():
-                print(c.permissions_for("MPARbot#8259"))
+                print(c.permissions_for(client.user))
             for c in client.get_all_channels():
                 async for m in client.logs_from(client.get_channel(c.id), limit=100000):
                     for r in m.reactions:

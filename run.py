@@ -93,7 +93,7 @@ async def check_for_retweets():
                                     new_messages.append(m)
                                     new_messages_timestamps.append(m.timestamp)
                                     new_messages_rcount.append(r.count)
-                except Forbidden as forbidden:
+                except Exception as forbidden:
                     print(str(forbidden))
 
             #post messages in order of timestamp

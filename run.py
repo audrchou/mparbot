@@ -83,17 +83,18 @@ async def check_for_retweets():
 
             #get all messages with the proper number of retweet emojis
             for c in client.get_all_channels():
-                print(c.permissions_for(client.user))
-            for c in client.get_all_channels():
-                async for m in client.logs_from(client.get_channel(c.id), limit=100000):
-                    for r in m.reactions:
-                        if r.custom_emoji:
-                            # if m.timestamp >= datetime.strptime('Aug 14 2018  5:00PM', '%b %d %Y %I:%M%p')\
-                            if r.emoji.name == 'retweet' and r.count > 2 and m.timestamp > last_retweeted \
-                                    and m.author != client.user:
-                                new_messages.append(m)
-                                new_messages_timestamps.append(m.timestamp)
-                                new_messages_rcount.append(r.count)
+                try:
+                    async for m in client.logs_from(client.get_channel(c.id), limit=100000):
+                        for r in m.reactions:
+                            if r.custom_emoji:
+                                # if m.timestamp >= datetime.strptime('Aug 14 2018  5:00PM', '%b %d %Y %I:%M%p')\
+                                if r.emoji.name == 'retweet' and r.count > 2 and m.timestamp > last_retweeted \
+                                        and m.author != client.user:
+                                    new_messages.append(m)
+                                    new_messages_timestamps.append(m.timestamp)
+                                    new_messages_rcount.append(r.count)
+                except Forbidden as forbidden:
+                    print(str(forbidden))
 
             #post messages in order of timestamp
             timestamps_order = sorted(range(len(new_messages_timestamps)), key=lambda k: new_messages_timestamps[k]) # indices of sorted

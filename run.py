@@ -95,6 +95,7 @@ async def check_for_retweets():
                                     new_messages_rcount.append(r.count)
                 except Exception as forbidden:
                     print(str(forbidden))
+                    print("Moving on...")
 
             #post messages in order of timestamp
             timestamps_order = sorted(range(len(new_messages_timestamps)), key=lambda k: new_messages_timestamps[k]) # indices of sorted

@@ -122,10 +122,9 @@ async def check_for_retweets():
                                           embed=em)
                 if len(m.embeds) > 0:
                     for embed in m.embeds:
-                        em = embed
                         await client.send_message(client.get_channel('777962550109012040'),
                                                   "",
-                                                  embed=em)
+                                                  embed)
                 print(nickname)
                 print(m.timestamp)
                 print(msg)

@@ -112,10 +112,9 @@ async def check_for_retweets():
                 else:
                     nickname = m.author.name
                     em.set_author(name=nickname, icon_url=m.author.avatar_url)
-                if len(m.attachments) > 0:
+                if len(m.attachments) == 1:
                     image_url = m.attachments[0].get('url')
                     em.set_image(url=image_url)
-                    # print(image_url)
                 em.set_footer(text="#" + m.channel.name)
                 await client.send_message(client.get_channel('777962550109012040'),
                                           msg,
@@ -124,8 +123,17 @@ async def check_for_retweets():
                 print(m.timestamp)
                 print(msg)
                 print(em.description)
+                if len(m.attachments) > 1:
+                    for attachment in m.attachments:
+                        print(attachment)
+                        image_url = attachment.get('url')
+                        em.set_image(url=image_url)
+                        await client.send_message(client.get_channel('777962550109012040'),
+                                                  "",
+                                                  embed=em)
                 if len(m.embeds) > 0:
                     for embed in m.embeds:
+                        print(embed)
                         em = discord.Embed.from_data(embed)
                         await client.send_message(client.get_channel('777962550109012040'),
                                                   "",

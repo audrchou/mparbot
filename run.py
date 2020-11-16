@@ -126,10 +126,10 @@ async def check_for_retweets():
                 print(em.description)
                 if len(m.embeds) > 0:
                     for embed in m.embeds:
-                        print(embed)
+                        em = discord.Embed.from_data(embed)
                         await client.send_message(client.get_channel('777962550109012040'),
                                                   "",
-                                                  embed = embed)
+                                                  embed = em)
             # new_last_retweeted = "'" + (new_messages_timestamps[timestamps_order[-1]]+timedelta(seconds=1)).strftime('%Y-%m-%d %H:%M:%S') + "'"
             # print("New last retweeted: " + new_last_retweeted)
 

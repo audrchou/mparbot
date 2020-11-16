@@ -120,15 +120,16 @@ async def check_for_retweets():
                 await client.send_message(client.get_channel('777962550109012040'),
                                           msg,
                                           embed=em)
-                if len(m.embeds) > 0:
-                    for embed in m.embeds:
-                        await client.send_message(client.get_channel('777962550109012040'),
-                                                  "",
-                                                  embed)
                 print(nickname)
                 print(m.timestamp)
                 print(msg)
                 print(em.description)
+                if len(m.embeds) > 0:
+                    for embed in m.embeds:
+                        print(embed)
+                        await client.send_message(client.get_channel('777962550109012040'),
+                                                  "",
+                                                  embed = embed)
             # new_last_retweeted = "'" + (new_messages_timestamps[timestamps_order[-1]]+timedelta(seconds=1)).strftime('%Y-%m-%d %H:%M:%S') + "'"
             # print("New last retweeted: " + new_last_retweeted)
 

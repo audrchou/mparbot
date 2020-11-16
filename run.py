@@ -148,12 +148,12 @@ async def check_for_retweets():
                         await client.send_message(client.get_channel('777962550109012040'),
                                                   "",
                                                   embed = em)
-            # new_last_retweeted = "'" + (new_messages_timestamps[timestamps_order[-1]]+timedelta(seconds=1)).strftime('%Y-%m-%d %H:%M:%S') + "'"
-            # print("New last retweeted: " + new_last_retweeted)
+            new_last_retweeted = "'" + (new_messages_timestamps[timestamps_order[-1]]+timedelta(seconds=1)).strftime('%Y-%m-%d %H:%M:%S') + "'"
+            print("New last retweeted: " + new_last_retweeted)
 
-            # #write new latest timestamp to database
-            # cur.execute("DELETE FROM last_retweeted;")
-            # cur.execute("INSERT INTO last_retweeted (timestamp) VALUES (%s)" % new_last_retweeted)
+            #write new latest timestamp to database
+            cur.execute("DELETE FROM last_retweeted;")
+            cur.execute("INSERT INTO last_retweeted (timestamp) VALUES (%s)" % new_last_retweeted)
 
             conn.commit()
             cur.close()

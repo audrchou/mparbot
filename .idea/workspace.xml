@@ -30,6 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -46,12 +47,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\thele\AppData\Local\Programs\Python\Python38-32\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mpar_bot.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -80,9 +81,33 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="431" y="79" key="CommitChangelistDialog2" timestamp="1605550212579">
+    <state x="206" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605550740358">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
-    <state x="431" y="79" key="CommitChangelistDialog2/0.0.1500.960@0.0.1500.960" timestamp="1605550212579" />
+    <state x="206" y="138" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1500.960@0.0.1500.960" timestamp="1605550740358" />
+    <state x="476" y="122" key="#mpar_bot" timestamp="1605550662215">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="476" y="122" key="#mpar_bot/0.0.1500.960@0.0.1500.960" timestamp="1605550662215" />
+    <state x="431" y="79" key="CommitChangelistDialog2" timestamp="1605551263184">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="431" y="79" key="CommitChangelistDialog2/0.0.1500.960@0.0.1500.960" timestamp="1605551263184" />
+    <state width="1480" height="255" key="GridCell.Tab.0.bottom" timestamp="1605552686347">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1480" height="255" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1605552686347" />
+    <state width="1480" height="255" key="GridCell.Tab.0.center" timestamp="1605552686347">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1480" height="255" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1605552686347" />
+    <state width="1480" height="255" key="GridCell.Tab.0.left" timestamp="1605552686347">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1480" height="255" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1605552686347" />
+    <state width="1480" height="255" key="GridCell.Tab.0.right" timestamp="1605552686347">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1480" height="255" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1605552686347" />
   </component>
 </project>

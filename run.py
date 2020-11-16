@@ -123,7 +123,6 @@ async def check_for_retweets():
                 if len(m.embeds) > 0:
                     for embed in m.embeds:
                         em = embed
-                        em['footer'] = text="#" + m.channel.name
                         await client.send_message(client.get_channel('777962550109012040'),
                                                   "",
                                                   embed=em)

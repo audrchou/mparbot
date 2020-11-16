@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1beaeec1-bf06-432e-946e-88b1b1f68d64" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,5 +78,11 @@
       <updated>1527045148400</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="431" y="79" key="CommitChangelistDialog2" timestamp="1605550212579">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="431" y="79" key="CommitChangelistDialog2/0.0.1500.960@0.0.1500.960" timestamp="1605550212579" />
   </component>
 </project>
